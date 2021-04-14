@@ -1,21 +1,20 @@
-trigger:
-- main
-
 pool:
   vmImage: Ubuntu-16.04
 
 variables:
-  # Container registry service connection established during pipeline creation
-  imageRepository: dotnetapp
-  containerRegistry: dotnetnoob
-  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
-  tag: '$(Build.BuildId)'
+  azureSubscriptionEndpoint: dotnottest
+  DockerNamespace: dotnetnoob.azurecr.io
+  DockerRepository: dotnetapp
+  WebAppName: containersdemoapp
 
-  # Agent VM image name
- 
+steps:
 
-- task: AzureWebAppContainer@1
+- task: AzureRMWebAppDeployment@4
+  displayName: Azure App Service Deploy
   inputs:
-    azureSubscription: dotnettest
-    appName: dotnotnoob
-    containers: $(containerRegistry)/$(imageRepository):$(tag)
+    appType: webAppContainer
+    ConnectedServiceName: $(azureSubscriptionEndpoint)
+    WebAppName: $(WebAppName)
+    DockerNamespace: $(DockerNamespace)
+    DockerRepository: $(DockerRepository)
+    DockerImageTag: $(Build.BuildId)
