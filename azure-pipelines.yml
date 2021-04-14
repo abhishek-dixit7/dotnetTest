@@ -1,35 +1,18 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
 - main
 
-pool:
-  vmImage: Ubuntu-18.04
-
 variables:
-  azureSubscriptionEndpoint: Contoso
-  DockerNamespace: dotnetnoob.azurecr.io
-  DockerRepository: dotnetnoob
-  WebAppName: dotnotnoob
-  azureSubscription: Azure for Students
-  appName: dotnotnoob
+  # Container registry service connection established during pipeline creation
+  imageRepository: dotnetapp
   containerRegistry: dotnetnoob
-    
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
+  tag: '$(Build.BuildId)'
 
-steps:
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
 
-- task: AzureRMWebAppDeployment@4
-  displayName: Azure App Service Deploy
+- task: AzureWebAppContainer@1 # Add this at the end of your file
   inputs:
-    appType: webAppContainer
-    ConnectedServiceName: $(azureSubscriptionEndpoint)
-    WebAppName: $(WebAppName)
-    DockerNamespace: $(DockerNamespace)
-    DockerRepository: $(DockerRepository)
-    DockerImageTag: $(Build.BuildId)
-    azureSubscription: $(azureSubscription)
-    appName: $(appName)
+    azureSubscription: '<Azure service connection>'
+    appName: '<Name of the container web app>'
     containers: $(containerRegistry)/$(imageRepository):$(tag)
