@@ -13,6 +13,6 @@ variables:
 
 - task: AzureWebAppContainer@1
   inputs:
-    azureSubscription: 'dotnettest'
-    appName: 'dotnotnoob'
+    azureSubscription: dotnettest
+    appName: dotnotnoob
     containers: $(containerRegistry)/$(imageRepository):$(tag)
