@@ -13,6 +13,6 @@ variables:
 
 - task: AzureWebAppContainer@1 # Add this at the end of your file
   inputs:
-    azureSubscription: '<Azure service connection>'
+    azureSubscription: 'dotnettest'
     appName: '<Name of the container web app>'
     containers: $(containerRegistry)/$(imageRepository):$(tag)
