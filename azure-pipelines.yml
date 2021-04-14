@@ -13,7 +13,11 @@ variables:
   azureSubscriptionEndpoint: Contoso
   DockerNamespace: dotnetnoob.azurecr.io
   DockerRepository: dotnetnoob
-  WebAppName: testnoobeasy
+  WebAppName: dotnotnoob
+  azureSubscription: Azure for Students
+  appName: dotnotnoob
+  containerRegistry: dotnetnoob
+    
 
 steps:
 
@@ -26,3 +30,6 @@ steps:
     DockerNamespace: $(DockerNamespace)
     DockerRepository: $(DockerRepository)
     DockerImageTag: $(Build.BuildId)
+    azureSubscription: $(azureSubscription)
+    appName: $(appName)
+    containers: $(containerRegistry)/$(imageRepository):$(tag)
