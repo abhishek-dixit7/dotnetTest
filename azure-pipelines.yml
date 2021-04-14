@@ -1,6 +1,9 @@
 trigger:
 - main
 
+pool:
+  vmImage: Ubuntu-16.04
+
 variables:
   # Container registry service connection established during pipeline creation
   imageRepository: dotnetapp
@@ -9,7 +12,7 @@ variables:
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
-  vmImageName: 'ubuntu-latest'
+ 
 
 - task: AzureWebAppContainer@1
   inputs:
